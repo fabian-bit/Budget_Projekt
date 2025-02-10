@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: flask_api
+    restart: always
+    # Wir mappen den Container-Port 5000 (Standard bei Flask) auf Host-Port 5500
+    ports:
+      - "5500:5000"
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: app
+      FLASK_RUN_HOST: 0.0.0.0
+      SQLALCHEMY_DATABASE_URI: "mysql+pymysql://user:password@db:3306/mydatabase"
+      FLASK_ENV: development
+    volumes:
+      - ./api:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vue_frontend
+    restart: always
+    # Hier wird der Entwicklungsserver von Vue (Standardport 8080) genutzt
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app
+      - node_modules_volume:/app/node_modules
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+  
+volumes:
+  node_modules_volume:

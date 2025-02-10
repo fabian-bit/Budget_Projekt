@@ -1,0 +1,3 @@
+# Ignore Node.js modules in the frontend directory
+frontend/node_modules/
+db_data
