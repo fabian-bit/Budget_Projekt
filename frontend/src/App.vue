@@ -1,47 +1,25 @@
 <!-- src/App.vue -->
 <template>
-    <div class="container mt-4">
-      <h1 class="text-center mb-4">Budget Planung</h1>
-      <CategoryForm @category-created="fetchCategories" />
-      <BudgetTable :categories="categories" />
-    </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import CategoryForm from './components/CategoryForm.vue';
-  import BudgetTable from './components/BudgetTable.vue';
-  
-  export default {
-    name: "App",
-    components: {
-      CategoryForm,
-      BudgetTable
-    },
-    data() {
-      return {
-        categories: []
-      }
-    },
-    created() {
-      this.fetchCategories();
-    },
-    methods: {
-      async fetchCategories() {
-        try {
-          const res = await axios.get('api/categories');
-          this.categories = res.data;
-        } catch (error) {
-          console.error("Fehler beim Laden der Kategorien", error);
-        }
-      }
-    }
-  }
-  </script>
-  
-  <style>
-  /* Globale Styles, z. B. ein dezenter Hintergrund */
-  body {
-    background-color: #f8f9fa;
-  }
-  </style>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">Budget Planner</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">Budget Planner</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/categories" class="nav-link">Category Manager</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <router-view></router-view>
+  </div>
+</template>
+
+<style>
+/* You can include some global navigation styles here or in your assets/styles.css */
+</style>

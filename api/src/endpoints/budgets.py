@@ -4,7 +4,7 @@ from src.models import BudgetEntry, db
 
 budgets_bp = Blueprint('budgets', __name__)
 
-@budgets_bp.route('/', methods=['GET'])
+@budgets_bp.route('', methods=['GET'])
 def get_budget():
     """
     Retrieve budget entries for a given category and year.
@@ -46,7 +46,7 @@ def get_budget():
         current_app.logger.error(f"Error retrieving budget: {e}")
         return jsonify({"error": "Internal server error"}), 500
 
-@budgets_bp.route('/', methods=['POST'])
+@budgets_bp.route('', methods=['POST'])
 def save_budget():
     """
     Save or update budget values for a given category and year.

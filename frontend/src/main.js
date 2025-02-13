@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import router from './router';
 import axios from 'axios';
+import './assets/styles.css'; // Global styles
 
-// Setze den Basis‑URL für alle axios-Anfragen
-axios.defaults.baseURL = 'http://localhost:5500';
+axios.defaults.baseURL = 'http://localhost:5500/api';
 
-createApp(App).mount('#app');
+createApp(App).use(router).mount('#app');
