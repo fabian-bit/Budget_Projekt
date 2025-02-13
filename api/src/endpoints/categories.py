@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app # type: ignore
 from src.models import Category
 
 categories_bp = Blueprint('categories', __name__)

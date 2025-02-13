@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app # type: ignore
 from datetime import datetime
 from src.models import BudgetEntry, db
 
