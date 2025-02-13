@@ -1,7 +1,6 @@
-Flask==2.0.3
-Flask-SQLAlchemy==2.5.1
-pymysql==1.0.2
-SQLAlchemy==1.4.47
-Werkzeug==2.0.3
-Flask-Cors==3.0.10
-cryptography==3.4.8
+Flask
+Flask-SQLAlchemy
+pymysql
+Flask-Cors
+cryptography
+Flask-Migrate

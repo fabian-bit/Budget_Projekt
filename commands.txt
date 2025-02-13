@@ -1,0 +1,3 @@
+flask db init #Create Migration Folder
+flask db migrate -m "First init" #Migration File
+flask db upgrade #Excecute Changes
